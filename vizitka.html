@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рамиль Сансеттов (Sunsettov) - Фандаб Вики</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .wiki-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #00ccff, #0099cc);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header Section */
+        .header-card {
+            background: linear-gradient(135deg, rgba(0, 204, 255, 0.1) 0%, rgba(26, 26, 46, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 204, 255, 0.2);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 204, 255, 0.1);
+        }
+
+        .header-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 204, 255, 0.2);
+        }
+
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 204, 255, 0.05), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            background: linear-gradient(45deg, #00ccff, #0099cc) padding-box,
+                       linear-gradient(45deg, #00ccff, #0099cc) border-box;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-image:hover,
+        .avatar-initials:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 30px rgba(0, 204, 255, 0.5);
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 300px;
+            z-index: 2;
+        }
+
+        .profile-name {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ccff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+        }
+
+        .profile-details {
+            display: grid;
+            gap: 8px;
+            font-size: 1.1em;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #00ccff;
+            min-width: 120px;
+        }
+
+        .detail-value {
+            color: #cccccc;
+        }
+
+        .team-tag {
+            display: inline-block;
+            background: rgba(0, 204, 255, 0.2);
+            color: #00ccff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 2px;
+            border: 1px solid rgba(0, 204, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .team-tag:hover {
+            background: rgba(0, 204, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(26, 26, 46, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 204, 255, 0.3);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #00ccff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #00ccff, #0099cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Modern Table */
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modern-table th {
+            background: linear-gradient(135deg, rgba(0, 204, 255, 0.3), rgba(0, 153, 204, 0.3));
+            color: #ffffff;
+            padding: 15px;
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 2px solid rgba(0, 204, 255, 0.5);
+        }
+
+        .modern-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .modern-table tr:hover td {
+            background: rgba(0, 204, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .modern-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: rgba(0, 204, 255, 0.1);
+            border: 1px solid rgba(0, 204, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 204, 255, 0.2);
+            background: rgba(0, 204, 255, 0.15);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        /* Links Section */
+        .links-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(0, 204, 255, 0.2), rgba(0, 153, 204, 0.2));
+            color: #00ccff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 204, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .link-button:hover {
+            background: linear-gradient(135deg, rgba(0, 204, 255, 0.3), rgba(0, 153, 204, 0.3));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 204, 255, 0.3);
+            color: #ffffff;
+        }
+
+        /* Categories */
+        .categories {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .category-link {
+            color: #00ccff;
+            text-decoration: none;
+            padding: 8px 15px;
+            background: rgba(0, 204, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 204, 255, 0.2);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .category-link:hover {
+            background: rgba(0, 204, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-name {
+                font-size: 2em;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modern-table {
+                font-size: 0.9em;
+            }
+            
+            .modern-table th,
+            .modern-table td {
+                padding: 10px;
+            }
+        }
+
+        /* Loading Animation */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="wiki-container">
+        <!-- Header Section -->
+        <div class="header-card fade-in">
+            <img src="ava.jpg" alt="Sunsettov" class="profile-image">
+            <div class="profile-info">
+                <h1 class="profile-name">Рамиль Сансеттов</h1>
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Псевдоним:</span>
+                        <span class="detail-value">Sunsettov</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Деятельность:</span>
+                        <span class="detail-value">Звукорежиссёр, менеджер проектов</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Активность:</span>
+                        <span class="detail-value">с 2024 года</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Команды:</span>
+                        <div class="detail-value">
+                            <span class="team-tag">LIQUID</span>
+                            <span class="team-tag">Akiry</span>
+                            <span class="team-tag">KamiSound</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Связь:</span>
+                        <a href="https://t.me/associatively" class="detail-value" style="color: #00ccff; text-decoration: none;">@associatively</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description Section -->
+        <div class="content-section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">🛠</span>
+                Описание
+            </h2>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                <strong>Sunsettov</strong> (Рамиль) — звукорежиссёр и проектный менеджер, начавший карьеру в 2024 году. Основал и возглавил команду <strong>LIQUID</strong>, а также сотрудничал с коллективами <strong>Akiry</strong> и <strong>KamiSound</strong>. Известен своим техничным подходом к звуку, высоким качеством финальных работ и умением выстраивать работу внутри команды. Работает над озвучкой аниме, игр и фан-проектов, совмещая художественный и технический подход.
+            </p>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="content-section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">🎧</span>
+                Озвученные релизы
+            </h2>
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Проект</th>
+                        <th>Студия</th>
+                        <th>Роль</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Шарлотта</strong></td>
+                        <td>Akiry</td>
+                        <td>Звукорежиссёр</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DMC (Devil May Cry)</strong></td>
+                        <td>KamiSound</td>
+                        <td>Звукорежиссёр</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Teams Section -->
+        <div class="content-section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">👥</span>
+                Участие в командах
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 style="color: #00ccff; margin-bottom: 10px;">LIQUID</h3>
+                    <p>Основатель, руководитель, звукорежиссёр</p>
+                </div>
+                <div class="skill-card">
+                    <h3 style="color: #00ccff; margin-bottom: 10px;">Akiry</h3>
+                    <p>Приглашённый звукорежиссёр</p>
+                </div>
+                <div class="skill-card">
+                    <h3 style="color: #00ccff; margin-bottom: 10px;">KamiSound</h3>
+                    <p>Приглашённый звукорежиссёр</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="content-section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">📈</span>
+                Основные навыки
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4 style="color: #00ccff; margin-bottom: 8px;">🎚️ Сведение и мастеринг</h4>
+                    <p>Профессиональная обработка озвучки</p>
+                </div>
+                <div class="skill-card">
+                    <h4 style="color: #00ccff; margin-bottom: 8px;">🎤 Работа с голосами</h4>
+                    <p>Обработка реплик и голосовых дорожек</p>
+                </div>
+                <div class="skill-card">
+                    <h4 style="color: #00ccff; margin-bottom: 8px;">🔧 Контроль качества</h4>
+                    <p>Технический контроль релизов</p>
+                </div>
+                <div class="skill-card">
+                    <h4 style="color: #00ccff; margin-bottom: 8px;">📋 Управление проектами</h4>
+                    <p>Координация актёров и процессов</p>
+                </div>
+                <div class="skill-card">
+                    <h4 style="color: #00ccff; margin-bottom: 8px;">🎛️ DAW</h4>
+                    <p>Работа в Reaper, FL Studio и др.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Section -->
+        <div class="content-section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">🌐</span>
+                Ссылки
+            </h2>
+            <div class="links-container">
+                <a href="https://t.me/associatively" class="link-button">
+                    <span>📱</span>
+                    Telegram — @associatively
+                </a>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="categories fade-in">
+            <h3 style="color: #00ccff; margin-bottom: 15px;">Категории:</h3>
+            <div class="category-links">
+                <a href="#" class="category-link">Участники</a>
+                <a href="#" class="category-link">Звукорежиссёры</a>
+                <a href="#" class="category-link">Менеджеры проектов</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.content-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                    }
+                });
+            });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // Add click effects
+        function addClickEffects() {
+            const cards = document.querySelectorAll('.skill-card, .team-tag, .link-button');
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('div');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(0, 204, 255, 0.3);
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                        z-index: 1000;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            animateOnScroll();
+            addClickEffects();
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
